@@ -5,8 +5,7 @@ function FundraiserCard(props) {
   const { fundraiserData } = props;
   const fundraiserLink = `fundraiser/${fundraiserData.id}`;
 
-  console.log(isLoading);
-
+  
   return (
     <div className="fundraiser-card">
       <Link to={fundraiserLink}>

@@ -4,7 +4,7 @@ import useFundraiser from "../hooks/use-fundraiser";
 function FundraiserPage() {
     const { id } = useParams();
     const { fundraiser, isLoading, error } = useFundraiser(id);
-  
+    
   if (isLoading) {
       return (<p>loading...</p>)
   }
@@ -12,7 +12,6 @@ function FundraiserPage() {
   if (error) {
       return (<p>{error.message}</p>)
   }
-
     return (
         <div>
             <h2>{fundraiser.title}</h2>
