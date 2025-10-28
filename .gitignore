@@ -22,3 +22,178 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+
+# ===============================
+# 🎓 LEARNING GUIDE: User Registration
+# ===============================
+
+# 📚 STEP 1: Registration Form Explanation
+# --------------------------------------
+
+1. WHAT WE'RE BUILDING:
+   - A form to let users create new accounts
+   - Like filling out a signup sheet, but online!
+
+2. KEY PARTS OF THE CODE:
+   
+   a) useState Hook:
+   ```jsx
+   const [formData, setFormData] = useState({
+       username: '',
+       email: '',
+       password: ''
+   });
+   ```
+   - Think of this as a magic notebook
+   - Keeps track of what users type
+   - Has 3 pages: username, email, password
+
+   b) handleChange Function:
+   ```jsx
+   const handleChange = (e) => {
+       setFormData({...formData, [e.target.name]: e.target.value});
+   };
+   ```
+   - Like an automatic secretary
+   - When someone types, it writes it down
+   - Keeps everything organized by field name
+
+   c) Form HTML:
+   ```jsx
+   <form onSubmit={handleSubmit}>
+       <div>
+           <label>Username:</label>
+           <input type="text" />
+       </div>
+   ```
+   - The actual form users see
+   - Like a paper form with boxes to fill in
+   - Has labels so users know what to type where
+
+3. HOW IT CONNECTS TO YOUR BACKEND:
+   - Your Django backend has /users/ endpoint
+   - This form will send data there
+   - Backend creates new users in database
+
+4. NEXT STEPS:
+   - Add API connection
+   - Create success messages
+   - Add error handling
+   - Style the form
+
+# 🎨 VISUAL FLOW:
+User types → Form stores data → Submit button → Backend receives → New account created!
+
+# 💡 REMEMBER:
+- This is just the form part
+- No data is sent yet
+- We'll add that in next steps
+
+# 📌 DEBUGGING TIPS:
+- Check console.log(formData) to see stored data
+- Make sure all input names match formData fields
+- Keep your Django server running
+
+# Next: We'll add API connection to actually create users!
+
+# ===============================
+
+
+
+# 🎓 REGISTRATION PROCESS DOCUMENTATION
+# ===================================
+
+## 📦 Files We Created
+1. src/api/post-registration.js - Handles API calls
+2. src/components/RegistrationForm.jsx - The registration form
+
+## 🔍 What Each Part Does
+
+### 1️⃣ post-registration.js Explained:
+```javascript
+const url = `${import.meta.env.VITE_API_URL}/users/`;
+```
+- Gets the API URL from your environment variables
+- Adds '/users/' to match your Django endpoint
+
+```javascript
+method: "POST",
+headers: {"Content-Type": "application/json"},
+```
+- POST: Like sending a letter
+- headers: Tells server we're sending JSON data
+
+```javascript
+body: JSON.stringify(registrationData)
+```
+- Takes user data (username, email, password)
+- Converts it to JSON format server can understand
+
+### 2️⃣ Error Handling:
+```javascript
+if (!response.ok) {
+    const fallbackError = `Error trying to register`;
+    // ...error handling code...
+}
+```
+- Catches problems (like server errors)
+- Shows user-friendly error messages
+- Prevents app from crashing
+
+## 🔄 The Process Flow:
+1. User fills out form
+2. Data gets sent to post-registration.js
+3. API sends data to Django backend
+4. Django creates new user
+5. Success/error message shown to user
+
+## 🐛 Debugging Tips:
+1. Check Network tab in DevTools (F12)
+2. Look for:
+   - POST request to /users/
+   - Response status (should be 201)
+   - Any error messages
+
+## ✅ How to Know It's Working:
+1. Form submits without errors
+2. Network tab shows successful POST
+3. You can log in with new account
+4. No red error messages appear
+
+## 🎯 Next Steps:
+1. Add form to router
+2. Create login page
+3. Add success messages
+4. Style the form
+
+# Keep this documentation for reference!
+# ===================================
+
+# 🚀 ROUTER SETUP DOCUMENTATION 
+# ============================
+
+## 📍 What We Did:
+We added the registration page to your app's navigation system (router)
+
+## 🗺️ Router Explanation:
+1. IMPORTS:
+   - Got React tools ✅
+   - Got router tools ✅ 
+   - Got all our pages ✅
+   - Got our NavBar ✅
+
+2. ROUTER SETUP:
+   ```javascript
+   const router = createBrowserRouter([
+     {
+       path: "/",          // Base URL
+       element: <NavBar /> // Shows on every page
+       children: [         // Pages under NavBar
+         { path: "/" },            // Home page
+         { path: "/register" },    // Registration page
+         { path: "/login" },       // Login page
+         { path: "/fundraiser/:id" } // Individual fundraiser
+       ]
+     }
+   ]);
