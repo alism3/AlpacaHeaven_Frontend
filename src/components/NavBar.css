@@ -1,19 +1,382 @@
-nav {
-  padding: 1rem;
-  background-color: #f8f9fa;
+@import "../pages/General.css";
+
+/* ==========================================
+   NAVBAR - Mobile First
+   ========================================== */
+.navbar {
+  background-color: var(--color-white);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--spacing-md);
   display: flex;
-  gap: 1rem;
+  justify-content: space-between;
+  align-items: center;
 }
 
-nav a {
+/* Logo */
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
   text-decoration: none;
-  color: #333;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  transition: background 0.2s;
+  transition: all 0.3s ease;
 }
 
-nav a:hover {
-  background: #e0e0e0;
-  color: #007bff;
+.nav-logo:hover {
+  opacity: 0.8;
+}
+
+.logo-icon {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: var(--font-weight-bold);
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--color-accent-primary) 0%, var(--color-accent-secondary) 100%);
+  color: var(--color-white);
+}
+
+.logo-text {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-dark);
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .logo-text {
+    display: inline;
+  }
+}
+
+/* Hamburger Menu */
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--spacing-sm);
+}
+
+.hamburger span {
+  width: 25px;
+  height: 3px;
+  background-color: var(--color-text-dark);
+  transition: all 0.3s ease;
+  border-radius: 2px;
+}
+
+/* Navigation Menu */
+.nav-menu {
+  display: none;
+  flex-direction: column;
+  position: absolute;
+  top: 70px;
+  left: 0;
+  width: 100%;
+  background-color: var(--color-white);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: var(--spacing-md);
+  gap: var(--spacing-sm);
+}
+
+.nav-menu.active {
+  display: flex;
+}
+
+/* Navigation Links */
+.nav-link {
+  color: var(--color-text-dark);
+  text-decoration: none;
+  font-weight: var(--font-weight-semibold);
+  padding: var(--spacing-sm);
+  transition: color 0.3s ease;
+  display: block;
+}
+
+.nav-link:hover {
+  color: var(--color-accent-primary);
+}
+
+.nav-login {
+  color: var(--color-accent-primary);
+  border-bottom: 2px solid var(--color-accent-primary);
+}
+
+.nav-register {
+  color: var(--color-white);
+  background-color: var(--color-accent-secondary);
+  border-radius: 8px;
+  text-align: center;
+  padding: var(--spacing-sm) var(--spacing-md);
+}
+
+/* ======================================
+   PROFILE DROPDOWN
+   ====================================== */
+.profile-dropdown {
+  position: relative;
+  display: none;
+}
+
+/* Profile Toggle - Icon + Speech Bubble */
+.profile-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: transform 0.3s ease, filter 0.3s ease;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;  /* ← Small gap, closer together */
+  position: relative;
+}
+
+.profile-toggle:hover {
+  transform: scale(1.15);
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.15));
+}
+
+.alpaca-icon {
+  display: inline-block;
+  width: 38px;  /* ← Slightly bigger (was 40px, but fits better) */
+  height: 38px;  /* ← Slightly bigger */
+  object-fit: contain;
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+}
+
+.profile-toggle:hover .alpaca-icon {
+  transform: scale(1.1);
+}
+
+/* Speech Bubble Style - BLACK, CLOSE TO HEAD */
+.speech-bubble {
+  background-color: #2C3E50;  /* ← Black */
+  color: var(--color-white);
+  padding: 4px 10px;  /* ← Smaller padding */
+  border-radius: 12px;
+  font-size: 11px;  /* ← Smaller font */
+  font-weight: var(--font-weight-bold);
+  white-space: nowrap;
+  position: relative;
+  display: inline-block;
+  animation: fadeIn 0.3s ease-out;
+  margin-left: -12px;  /* ← Overlap closer */
+  margin-top: -6px;  /* ← Move up to head level */
+}
+
+/* Speech bubble tail/pointer pointing LEFT (towards alpaca head) */
+.speech-bubble::before {
+  content: '';
+  position: absolute;
+  left: -10px;  /* ← Connect to alpaca */
+  top: 30%;  /* ← Position at alpaca head height */
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-right: 10px solid #2C3E50;  /* ← Black arrow */
+}
+/* Speech bubble tail/pointer - REMOVED */
+.speech-bubble::before {
+  content: none;  /* ← Removes the triangle completely */
+}
+
+/* Profile Dropdown Menu */
+.profile-menu {
+  position: absolute;
+  top: 100px;
+  right: 0;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  padding: var(--spacing-sm) 0;
+  min-width: 160px;
+  z-index: 200;
+  animation: slideDown 0.2s ease-out;
+}
+
+.profile-link {
+  display: block;
+  color: var(--color-text-dark);
+  text-decoration: none;
+  padding: var(--spacing-sm) var(--spacing-md);
+  transition: background-color 0.2s ease;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+}
+
+.profile-link:hover {
+  background-color: var(--color-background);
+  color: var(--color-accent-primary);
+}
+
+.profile-logout {
+  width: 100%;
+  background: none;
+  border: none;
+  color: var(--color-text-dark);
+  padding: var(--spacing-sm) var(--spacing-md);
+  cursor: pointer;
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-base);
+  transition: background-color 0.2s ease, color 0.2s ease;
+  text-align: left;
+}
+
+.profile-logout:hover {
+  background-color: #FFEBEE;
+  color: var(--color-error);
+}
+
+/* User Menu - Mobile */
+.nav-user-menu {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  border-top: 1px solid var(--color-border);
+  padding-top: var(--spacing-sm);
+}
+
+.btn-logout {
+  background-color: var(--color-error);
+  color: var(--color-white);
+  border: none;
+  border-radius: 8px;
+  padding: var(--spacing-sm) var(--spacing-md);
+  cursor: pointer;
+  font-weight: var(--font-weight-bold);
+  transition: background-color 0.3s ease;
+}
+
+.btn-logout:hover {
+  background-color: #C0392B;
+}
+
+/* ======================================
+   RESPONSIVE CLASSES
+   ====================================== */
+.desktop-only {
+  display: none;
+}
+
+.mobile-only {
+  display: flex;
+}
+
+/* ======================================
+   NAVBAR - TABLET (768px+)
+   ====================================== */
+@media (min-width: 768px) {
+  .hamburger {
+    display: none;
+  }
+
+  .nav-menu {
+    display: flex;
+    flex-direction: row;
+    position: static;
+    width: auto;
+    background: none;
+    box-shadow: none;
+    padding: 0;
+    gap: var(--spacing-lg);
+    align-items: center;
+  }
+
+  .nav-link {
+    padding: 0;
+  }
+
+  .nav-user-menu {
+    display: none;
+  }
+
+  .nav-login {
+    border: none;
+  }
+
+  .nav-register {
+    background-color: var(--color-accent-secondary);
+    color: var(--color-white);
+    padding: var(--spacing-sm) var(--spacing-lg);
+    text-align: center;
+    border-radius: 8px;
+  }
+
+  /* Show profile dropdown on desktop */
+  .profile-dropdown {
+    display: block;
+  }
+
+  .mobile-only {
+    display: none;
+  }
+}
+
+/* ======================================
+   NAVBAR - DESKTOP (1024px+)
+   ====================================== */
+@media (min-width: 1024px) {
+  .nav-container {
+    padding: var(--spacing-sm) var(--spacing-lg);
+  }
+
+  .nav-logo {
+    gap: var(--spacing-xs);
+  }
+
+  .logo-icon {
+    width: 35px;
+    height: 35px;
+    font-size: 1.2rem;
+  }
+
+  .logo-text {
+    font-size: 1.1rem;
+  }
+}
+
+/* ======================================
+   ANIMATIONS
+   ====================================== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

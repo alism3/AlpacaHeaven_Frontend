@@ -1,0 +1,292 @@
+/* ==========================================
+   ALPACA HEAVEN - GLOBAL STYLES
+   Mobile-First Approach
+   ========================================== */
+
+/* ======================================
+   COLOR PALETTE
+   ====================================== */
+:root {
+  /* Alpaca & Nature Colors */
+  --color-cream: #FFF8F0;
+  --color-white: #FFFFFF;
+  --color-alpaca-gray: #D4C5B9;
+  --color-alpaca-brown: #8B7355;
+  --color-pasture-green: #A8D5BA;
+  --color-sky-blue: #87CEEB;
+  --color-sun-yellow: #FFD700;
+  
+  /* Accent Colors */
+  --color-accent-primary: #FF6B6B;
+  --color-accent-secondary: #4ECDC4;
+  --color-accent-tertiary: #FFB347;
+  
+  /* Neutral Colors */
+  --color-text-dark: #2C3E50;
+  --color-text-light: #7F8C8D;
+  --color-border: #E0E0E0;
+  --color-background: #FAFAF8;
+  
+  /* Error/Success */
+  --color-error: #E74C3C;
+  --color-success: #27AE60;
+}
+
+/* ======================================
+   TYPOGRAPHY
+   ====================================== */
+:root {
+  --font-heading: 'Poppins', 'Montserrat', sans-serif;
+  --font-body: 'Lato', 'Open Sans', sans-serif;
+  
+  /* Mobile Font Sizes */
+  --font-size-xl: 2rem;
+  --font-size-lg: 1.5rem;
+  --font-size-md: 1.1rem;
+  --font-size-base: 1rem;
+  --font-size-sm: 0.875rem;
+  
+  /* Font Weights */
+  --font-weight-bold: 700;
+  --font-weight-semibold: 600;
+  --font-weight-normal: 400;
+}
+
+/* ======================================
+   SPACING
+   ====================================== */
+:root {
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 2.5rem;
+  --spacing-xxl: 3rem;
+}
+
+/* ======================================
+   RESET & BASE STYLES
+   ====================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-text-dark);
+  background-color: var(--color-background);
+  line-height: 1.6;
+}
+
+/* ======================================
+   HEADINGS
+   ====================================== */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  color: var(--color-text-dark);
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+}
+
+h2 {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+}
+
+h3 {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* ======================================
+   BUTTONS - Base Styles
+   ====================================== */
+.btn {
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: none;
+  border-radius: 8px;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-block;
+  text-decoration: none;
+  width: 100%;
+  text-align: center;
+}
+
+.btn-primary {
+  background-color: var(--color-accent-primary);
+  color: var(--color-white);
+}
+
+.btn-primary:hover {
+  background-color: #E55555;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
+}
+
+.btn-secondary {
+  background-color: var(--color-accent-secondary);
+  color: var(--color-white);
+}
+
+.btn-secondary:hover {
+  background-color: #45B8AD;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(78, 205, 196, 0.3);
+}
+
+.btn-large {
+  padding: var(--spacing-md) var(--spacing-lg);
+  font-size: var(--font-size-md);
+}
+
+/* ======================================
+   LINKS
+   ====================================== */
+a {
+  color: var(--color-accent-primary);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--color-accent-secondary);
+}
+
+/* ======================================
+   CONTAINER
+   ====================================== */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+  width: 100%;
+}
+
+/* ======================================
+   SECTIONS
+   ====================================== */
+.section {
+  padding: var(--spacing-lg) 0;
+}
+
+.section-dark {
+  background-color: var(--color-alpaca-brown);
+  color: var(--color-white);
+}
+
+.section-light {
+  background-color: var(--color-cream);
+}
+
+/* ======================================
+   FLEXBOX UTILITIES
+   ====================================== */
+.flex-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.flex-space-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+/* ======================================
+   GRID UTILITIES
+   ====================================== */
+.grid-responsive {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-md);
+}
+
+/* ======================================
+   MEDIA QUERIES - TABLET (768px+)
+   ====================================== */
+@media (min-width: 768px) {
+  :root {
+    --font-size-xl: 2.5rem;
+    --font-size-lg: 1.8rem;
+    --font-size-md: 1.2rem;
+    --spacing-xl: 3rem;
+  }
+
+  .section {
+    padding: var(--spacing-xl) 0;
+  }
+
+  .btn {
+    width: auto;
+  }
+
+  .flex-container {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .grid-responsive {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ======================================
+   MEDIA QUERIES - DESKTOP (1024px+)
+   ====================================== */
+@media (min-width: 1024px) {
+  :root {
+    --font-size-xl: 3rem;
+    --font-size-lg: 2rem;
+    --font-size-md: 1.25rem;
+    --spacing-xl: 3.5rem;
+    --spacing-xxl: 4rem;
+  }
+
+  .section {
+    padding: var(--spacing-xxl) 0;
+  }
+
+  .grid-responsive {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .flex-container {
+    gap: var(--spacing-lg);
+  }
+}
+
+/* ======================================
+   MEDIA QUERIES - LARGE DESKTOP (1440px+)
+   ====================================== */
+@media (min-width: 1440px) {
+  .container {
+    max-width: 1400px;
+  }
+
+  .grid-responsive {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

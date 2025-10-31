@@ -1,6 +1,343 @@
-#fundraiser-list {
+@import "../pages/General.css";
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+
+/* ==========================================
+   HERO SECTION - Mobile First
+   ========================================== */
+.hero-section {
+  position: relative;
+  width: 100%;
+  height: 80vh;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+}
+
+/* IMPROVED OVERLAY - Darker for better readability */
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.5) 0%,
+    rgba(0, 0, 0, 0.6) 50%,
+    rgba(0, 0, 0, 0.5) 100%
+  );
+  z-index: 1;
+}
+
+/* Hero content container */
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 90%;
+  padding: var(--spacing-lg);
+  animation: fadeInUp 0.8s ease-out;
+}
+
+/* ==========================================
+   HERO TITLE - "Welcome to" (MOBILE)
+   ========================================== */
+.hero-title {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: var(--spacing-xs);
+  color: var(--color-white);
+  text-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  line-height: 1.2;
+  letter-spacing: 0;
+  animation: titleBounce 0.8s ease-out;
+}
+
+/* ==========================================
+   HERO TITLE ACCENT - "Alpaca Heaven" (MOBILE)
+   ========================================== */
+.hero-title-accent {
+  font-family: 'Great Vibes', cursive;
+  font-size: 2.5rem;
+  font-weight: 400;
+  color: var(--color-white);
+  display: block;
+  text-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  letter-spacing: 1px;
+  margin: var(--spacing-xs) 0;
+}
+
+/* ==========================================
+   HERO SUBTITLE - Eye Catching (MOBILE)
+   ========================================== */
+.hero-subtitle {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: var(--spacing-md);
+  color: var(--color-accent-primary);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  animation: subtitleGlow 1.2s ease-out;
+}
+
+/* ==========================================
+   HERO DESCRIPTION
+   ========================================== */
+.hero-description {
+  font-family: var(--font-body);
+  font-size: var(--font-size-base);
+  color: var(--color-white);
+  margin-bottom: var(--spacing-lg);
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  line-height: 1.7;
+  font-weight: 500;
+}
+
+/* ==========================================
+   HERO ACTIONS - Compact & 3D Buttons
+   ========================================== */
+.hero-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-md);
+  align-items: center;
+  justify-content: center;
+}
+
+/* ==========================================
+   3D ROUNDED BUTTONS
+   ========================================== */
+.btn-rounded {
+  border-radius: 50px;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  min-width: 160px;
+  height: auto;
+  position: relative;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 
+    0 8px 0px rgba(0, 0, 0, 0.15),
+    0 8px 16px rgba(0, 0, 0, 0.2);
+  transform: translateY(0);
+}
+
+/* Primary 3D Button */
+.btn-primary.btn-rounded {
+  background: linear-gradient(135deg, var(--color-accent-primary) 0%, #E55555 100%);
+  color: var(--color-white);
+}
+
+.btn-primary.btn-rounded:hover {
+  transform: translateY(-4px);
+  box-shadow: 
+    0 12px 0px rgba(0, 0, 0, 0.2),
+    0 12px 24px rgba(255, 107, 107, 0.4);
+}
+
+.btn-primary.btn-rounded:active {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 4px 0px rgba(0, 0, 0, 0.15),
+    0 4px 8px rgba(255, 107, 107, 0.3);
+}
+
+/* Secondary 3D Button */
+.btn-secondary.btn-rounded {
+  background: linear-gradient(135deg, var(--color-accent-secondary) 0%, #45B8AD 100%);
+  color: var(--color-white);
+}
+
+.btn-secondary.btn-rounded:hover {
+  transform: translateY(-4px);
+  box-shadow: 
+    0 12px 0px rgba(0, 0, 0, 0.2),
+    0 12px 24px rgba(78, 205, 196, 0.4);
+}
+
+.btn-secondary.btn-rounded:active {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 4px 0px rgba(0, 0, 0, 0.15),
+    0 4px 8px rgba(78, 205, 196, 0.3);
+}
+
+/* ==========================================
+   FUNDRAISERS SECTION
+   ========================================== */
+.fundraiser-list {
   display: grid;
-  grid-template-columns: 30% 30% 30%;
-  column-gap: 10px;
-  row-gap: 10px;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-md);
+}
+
+.no-fundraisers {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: var(--spacing-xl);
+  color: var(--color-text-light);
+  font-size: var(--font-size-md);
+}
+
+/* ==========================================
+   ANIMATIONS
+   ========================================== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes titleBounce {
+  0% {
+    opacity: 0;
+    transform: translateY(-50px) scale(0.8);
+  }
+  60% {
+    transform: translateY(10px) scale(1.05);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes subtitleGlow {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ======================================
+   HERO SECTION - TABLET (768px+)
+   ====================================== */
+@media (min-width: 768px) {
+  .hero-section {
+    height: 85vh;
+  }
+
+  .hero-content {
+    max-width: 700px;
+    padding: var(--spacing-xl);
+  }
+
+  .hero-title {
+    font-size: 1.5rem;
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .hero-title-accent {
+    font-size: 4rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1.4rem;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .hero-description {
+    font-size: var(--font-size-md);
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .hero-actions {
+    flex-direction: row;
+    justify-content: center;
+    gap: var(--spacing-lg);
+  }
+
+  .btn-rounded {
+    min-width: 180px;
+  }
+}
+
+/* ======================================
+   HERO SECTION - DESKTOP (1024px+)
+   ====================================== */
+@media (min-width: 1024px) {
+  .hero-section {
+    height: 90vh;
+  }
+
+  .hero-content {
+    max-width: 800px;
+    padding: var(--spacing-xxl);
+  }
+
+  .hero-title {
+    font-size: 1.8rem;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .hero-title-accent {
+    font-size: 5rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1.6rem;
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .hero-description {
+    font-size: var(--font-size-md);
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .hero-actions {
+    gap: var(--spacing-xl);
+  }
+
+  .btn-rounded {
+    min-width: 200px;
+  }
+}
+
+/* ======================================
+   HERO SECTION - LARGE DESKTOP (1440px+)
+   ====================================== */
+@media (min-width: 1440px) {
+  .hero-section {
+    height: 100vh;
+  }
+
+  .hero-content {
+    max-width: 900px;
+  }
+
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  .hero-title-accent {
+    font-size: 6rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1.8rem;
+  }
+
+  .fundraiser-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
