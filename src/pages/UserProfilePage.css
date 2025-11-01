@@ -1,0 +1,306 @@
+@import "./General.css";
+
+.profile-page {
+  min-height: 100vh;
+  background-color: var(--color-background);
+  padding: var(--spacing-lg);
+}
+
+.profile-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Profile Header */
+.profile-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--color-white);
+  padding: var(--spacing-lg);
+  border-radius: 12px;
+  margin-bottom: var(--spacing-lg);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.profile-info {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-lg);
+}
+
+.profile-avatar {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, var(--color-accent-primary) 0%, var(--color-accent-secondary) 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+}
+
+.profile-header h1 {
+  font-size: 2rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-dark);
+  margin-bottom: var(--spacing-xs);
+}
+
+.profile-email {
+  color: var(--color-text-light);
+  font-size: var(--font-size-base);
+}
+
+.create-btn {
+  background-color: var(--color-accent-primary);
+  color: var(--color-white);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: var(--font-weight-bold);
+  transition: all 0.3s ease;
+}
+
+.create-btn:hover {
+  background-color: var(--color-accent-secondary);
+  transform: translateY(-2px);
+}
+
+/* Tabs */
+.profile-tabs {
+  display: flex;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-lg);
+}
+
+.tab {
+  background-color: var(--color-white);
+  border: 2px solid var(--color-border);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: var(--font-weight-semibold);
+  transition: all 0.3s ease;
+}
+
+.tab.active {
+  background-color: var(--color-accent-primary);
+  color: var(--color-white);
+  border-color: var(--color-accent-primary);
+}
+
+.tab:hover:not(.active) {
+  border-color: var(--color-accent-primary);
+  color: var(--color-accent-primary);
+}
+
+/* Content */
+.tab-content {
+  background-color: var(--color-white);
+  border-radius: 12px;
+  padding: var(--spacing-lg);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.empty-state {
+  text-align: center;
+  padding: 60px var(--spacing-lg);
+}
+
+.empty-state p {
+  font-size: 1.2rem;
+  color: var(--color-text-light);
+  margin-bottom: var(--spacing-lg);
+}
+
+.cta-btn {
+  background-color: var(--color-accent-secondary);
+  color: var(--color-white);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: var(--font-weight-bold);
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+.cta-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(78, 205, 196, 0.3);
+}
+
+/* Items Grid */
+.items-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--spacing-lg);
+}
+
+.fundraiser-item {
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.fundraiser-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.item-image {
+  height: 200px;
+  background-color: var(--color-background);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.item-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.placeholder {
+  font-size: 3rem;
+  color: var(--color-text-light);
+}
+
+.item-content {
+  padding: var(--spacing-lg);
+}
+
+.item-content h3 {
+  font-size: 1.2rem;
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--spacing-sm);
+  color: var(--color-text-dark);
+}
+
+.item-description {
+  color: var(--color-text-light);
+  margin-bottom: var(--spacing-md);
+  line-height: 1.5;
+}
+
+.item-stats {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-md);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-light);
+}
+
+.item-actions {
+  display: flex;
+  gap: var(--spacing-sm);
+}
+
+.btn {
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  text-align: center;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s ease;
+  flex: 1;
+}
+
+.btn-primary {
+  background-color: var(--color-accent-primary);
+  color: var(--color-white);
+}
+
+.btn-secondary {
+  background-color: var(--color-text-light);
+  color: var(--color-white);
+}
+
+.btn-danger {
+  background-color: var(--color-error);
+  color: var(--color-white);
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  opacity: 0.9;
+}
+
+/* Pledges List */
+.pledges-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.pledge-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-lg);
+  padding: var(--spacing-md);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.pledge-item:hover {
+  background-color: var(--color-background);
+}
+
+.pledge-amount {
+  font-size: 1.5rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-accent-primary);
+  min-width: 80px;
+}
+
+.pledge-details h4 {
+  color: var(--color-text-dark);
+  margin-bottom: var(--spacing-xs);
+}
+
+.pledge-details p {
+  color: var(--color-text-light);
+  margin-bottom: var(--spacing-xs);
+  font-style: italic;
+}
+
+.pledge-date {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-light);
+}
+
+.loading-state {
+  text-align: center;
+  padding: 60px;
+  font-size: 1.2rem;
+  color: var(--color-text-light);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .profile-header {
+    flex-direction: column;
+    gap: var(--spacing-lg);
+  }
+
+  .profile-info {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .items-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pledge-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+

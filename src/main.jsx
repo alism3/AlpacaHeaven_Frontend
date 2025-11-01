@@ -7,6 +7,8 @@ import HomePage from "./pages/HomePage.jsx";
 import FundraiserPage from "./pages/FundraiserPage.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
 import RegistrationPage from "./pages/RegistrationPage.jsx";
+import UserProfilePage from "./pages/UserProfilePage.jsx";
+import NotFoundPage from "./pages/NotFoundPage.jsx";
 
 import NavBar from "./components/NavBar.jsx";
 
@@ -20,13 +22,15 @@ const router = createBrowserRouter([
       { path: "/fundraiser/:id", element: <FundraiserPage /> },
       { path: "/register", element: <RegistrationPage /> },
       { path: "/create-fundraiser", element: <FundraiserForm /> },
+      { path: "/profile", element: <UserProfilePage /> },
+      { path: "/my-pledges", element: <UserProfilePage /> }, // Same page, different tab
+      { path: "*", element: <NotFoundPage /> }, // 404 catch-all
     ],
   },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    {/* Here we wrap our app in the router provider so they render */}
     <RouterProvider router={router} />
   </React.StrictMode>
 );

@@ -69,116 +69,136 @@ function NavBar() {
           </button>
 
           {/* Navigation Menu */}
-          <div className={`nav-menu ${mobileMenuOpen ? "active" : ""}`}>
-            <Link 
-              to="/" 
-              className="nav-link"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Home
-            </Link>
+{/* Navigation Menu */}
+<div className={`nav-menu ${mobileMenuOpen ? "active" : ""}`}>
+  <Link 
+    to="/" 
+    className="nav-link"
+    onClick={() => setMobileMenuOpen(false)}
+  >
+    Home
+  </Link>
 
-            {isLoggedIn ? (
-              <>
-                {/* Logged In User Menu */}
-                <Link 
-                  to="/create-fundraiser" 
-                  className="nav-link"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Create Campaign
-                </Link>
+  {isLoggedIn ? (
+    <>
+      {/* Logged In User Menu */}
+      <Link 
+        to="/create-fundraiser" 
+        className="nav-link"
+        onClick={() => setMobileMenuOpen(false)}
+      >
+        Create Campaign
+      </Link>
 
-                <Link 
-                  to="/" 
-                  className="nav-link"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Browse
-                </Link>
+      <Link 
+        to="/" 
+        className="nav-link"
+        onClick={() => setMobileMenuOpen(false)}
+      >
+        Browse Campaigns
+      </Link>
 
-                {/* Profile Dropdown - Desktop */}
-                <div className="profile-dropdown desktop-only">
-                  <button 
-                    className="profile-toggle"
-                    onClick={toggleProfileMenu}
-                    aria-label="Profile menu"
-                  >
-                    <img 
-                      src={alpacaIcon} 
-                      alt="Profile" 
-                      className="alpaca-icon"
-                    />
-                    <span className="speech-bubble">Hi {currentUser?.username}!</span>
-                  </button>
+    {/* Profile Dropdown - Desktop - ENHANCED */}
+    <div className="profile-dropdown desktop-only">
+      <button 
+        className="profile-toggle"
+        onClick={toggleProfileMenu}
+        aria-label="Profile menu"
+      >
+        <img 
+          src={alpacaIcon} 
+          alt="Profile" 
+          className="alpaca-icon"
+        />
+        <span className="speech-bubble">Hi {currentUser?.username}!</span>
+        {/* ADD DROPDOWN ARROW */}
+        <span className="dropdown-arrow">▼</span>
+      </button>
 
-                  {profileMenuOpen && (
-                    <div className="profile-menu">
-                      <Link 
-                        to="/profile" 
-                        className="profile-link"
-                        onClick={() => setProfileMenuOpen(false)}
-                      >
-                        👤 My Profile
-                      </Link>
-
-                      <button 
-                        className="profile-logout"
-                        onClick={handleLogout}
-                      >
-                        🚪 Logout
-                      </button>
-                    </div>
-                  )}
-                </div>
-
-                {/* Profile Menu - Mobile */}
-                <div className="nav-user-menu mobile-only">
-                  <Link 
-                    to="/profile" 
-                    className="nav-link"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    👤 My Profile
-                  </Link>
-
-                  <button 
-                    className="btn-logout"
-                    onClick={handleLogout}
-                  >
-                    🚪 Logout
-                  </button>
-                </div>
-              </>
-            ) : (
-              <>
-                {/* Not Logged In - Show Auth Links */}
-                <Link 
-                  to="/" 
-                  className="nav-link"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Browse
-                </Link>
-
-                <Link 
-                  to="/login" 
-                  className="nav-link nav-login"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Login
-                </Link>
-
-                <Link 
-                  to="/register" 
-                  className="nav-link nav-register"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Register
-                </Link>
-              </>
-            )}
+      {profileMenuOpen && (
+        <div className="profile-menu">
+          <div className="profile-menu-header">
+            <strong>{currentUser?.username}</strong>
+            <span className="user-email">{currentUser?.email}</span>
           </div>
+          
+          <hr className="menu-divider" />
+          
+          <Link 
+            to="/profile" 
+            className="profile-link"
+            onClick={() => setProfileMenuOpen(false)}
+          >
+            👤 My Fundraisers
+          </Link>
+
+          <Link 
+            to="/profile?tab=pledges" 
+            className="profile-link"
+            onClick={() => setProfileMenuOpen(false)}
+          >
+            💰 My Pledges
+          </Link>
+          
+          <hr className="menu-divider" />
+
+          <button 
+            className="profile-logout"
+            onClick={handleLogout}
+          >
+            🚪 Logout
+          </button>
+        </div>
+      )}
+    </div>
+
+      {/* Profile Menu - Mobile */}
+      <div className="nav-user-menu mobile-only">
+        <Link 
+          to="/profile" 
+          className="nav-link"
+          onClick={() => setMobileMenuOpen(false)}
+        >
+          👤 My Profile
+        </Link>
+
+        <button 
+          className="btn-logout"
+          onClick={handleLogout}
+        >
+          🚪 Logout
+        </button>
+      </div>
+    </>
+  ) : (
+    <>
+      {/* Not Logged In - Show Auth Links */}
+      <Link 
+        to="/" 
+        className="nav-link"
+        onClick={() => setMobileMenuOpen(false)}
+      >
+        Browse
+      </Link>
+
+      <Link 
+        to="/login" 
+        className="nav-link nav-login"
+        onClick={() => setMobileMenuOpen(false)}
+      >
+        Login
+      </Link>
+
+      <Link 
+        to="/register" 
+        className="nav-link nav-register"
+        onClick={() => setMobileMenuOpen(false)}
+      >
+        Register
+      </Link>
+    </>
+  )}
+</div>
         </div>
       </nav>
 
