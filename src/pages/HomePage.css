@@ -341,3 +341,67 @@
     grid-template-columns: repeat(3, 1fr);
   }
 }
+
+/* OPTIMAL FUNDRAISERS GRID */
+.fundraisers-grid {
+  display: grid;
+  gap: 24px;
+  margin-top: 40px;
+  
+  /* MOBILE FIRST: 1 column */
+  grid-template-columns: 1fr;
+}
+
+/* TABLET: 2 columns (768px+) */
+@media (min-width: 768px) {
+  .fundraisers-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+  }
+}
+
+/* DESKTOP: 3 columns (1024px+) */
+@media (min-width: 1024px) {
+  .fundraisers-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+  }
+}
+
+/* LARGE DESKTOP: Still 3 columns but more space */
+@media (min-width: 1400px) {
+  .fundraisers-grid {
+    max-width: 1400px;
+    margin: 40px auto 0;
+    gap: 48px;
+  }
+}
+
+/* ENSURE CARDS ARE ALWAYS PROPORTIONATE */
+.fundraiser-card {
+  background-color: var(--color-white);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  text-decoration: none;
+  color: inherit;
+  
+  /* Cards always same height in row */
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* This makes all cards same height! */
+}
+
+.card-content {
+  padding: var(--spacing-lg);
+  flex: 1; /* This makes content area flexible */
+  display: flex;
+  flex-direction: column;
+}
+
+.card-stats {
+  margin-top: auto; /* Push stats to bottom */
+  padding-top: var(--spacing-md);
+  border-top: 1px solid var(--color-border);
+}
