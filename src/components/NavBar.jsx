@@ -100,15 +100,8 @@ function NavBar() {
 
           {/* Navigation Menu */}
           <div className={`nav-menu ${mobileMenuOpen ? "active" : ""}`}>
-            <Link 
-              to="/" 
-              className="nav-link"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Home
-            </Link>
 
-            {isLoggedIn ? (
+          {isLoggedIn ? (
               <>
                 {/* Logged In User Menu */}
                 <Link 
@@ -207,7 +200,7 @@ function NavBar() {
                   className="nav-link"
                   style={{ background: 'none', border: 'none', cursor: 'pointer' }}
                 >
-                  Browse
+                  Campaigns
                 </button>
 
                 <Link 

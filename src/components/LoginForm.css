@@ -50,37 +50,107 @@
 }
 
 /* ==========================================
-   LOGIN FORM CONTAINER
+   LOGIN FORM CONTAINER - SINGLE CLEAN VERSION
    ========================================== */
 .login-form-container {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: calc(100vh - 70px);
-  background: linear-gradient(135deg, var(--color-background) 0%, #F5F5F5 100%);
   padding: var(--spacing-lg);
+  
+  /* Beautiful alpaca background */
+  background-image: 
+  linear-gradient(135deg, rgba(255, 255, 255, 0.6) 0%, rgba(245, 245, 245, 0.5) 100%),
+    url('https://images.unsplash.com/photo-1572297982753-48c028401d18?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1964');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
 }
 
 /* ==========================================
-   LOGIN FORM
+   LOGIN FORM - SINGLE CLEAN VERSION
    ========================================== */
 .login-form {
-  background-color: var(--color-white);
-  border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-  padding: var(--spacing-xl);
-  max-width: 400px;
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 20px;
+  box-shadow: 
+    0 12px 40px rgba(0, 0, 0, 0.15),
+    0 4px 20px rgba(0, 0, 0, 0.1);
+  padding: var(--spacing-xxl);
+  max-width: 500px;
   width: 100%;
+  margin: var(--spacing-lg);
   animation: slideUp 0.5s ease-out;
+}
+
+/* Add this after line 87: */
+.login-title-icon {
+  width: 120px;  
+  height: 120px;
+  margin-bottom: var(--spacing-md); 
+  margin-right: 0; 
+  object-fit: contain; 
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
 }
 
 .login-form h2 {
   font-family: var(--font-heading);
-  font-size: var(--font-size-xl);
+  font-size: 2.8rem; /* SMALLER: was 3.5rem */
   font-weight: var(--font-weight-bold);
-  color: var(--color-text-dark);
-  margin-bottom: var(--spacing-lg);
+  color: #000000;
+  margin-bottom: var(--spacing-xl);
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  line-height: 1.2;
+}
+/* Mobile optimization - SINGLE CLEAN VERSION */
+@media (max-width: 768px) {
+  .login-form-container {
+    padding: var(--spacing-md);
+    background-attachment: scroll;
+  }
+  
+  .login-form {
+    padding: var(--spacing-lg);
+    border-radius: 16px;
+    margin: var(--spacing-sm);
+    max-width: 100%;
+  }
+  
+  .login-form h2 {
+    font-size: 2.2rem; /* Single line size */
+  }
+  
+  .login-title-icon {
+    width: 90px;
+    height: 90px;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-form-container {
+    padding: var(--spacing-sm);
+  }
+  
+  .login-form {
+    padding: var(--spacing-md);
+  }
+  
+  .login-form h2 {
+    font-size: 2rem; /* Small screen size */
+  }
+  
+  .login-title-icon {
+    width: 80px;
+    height: 80px;
+  }
 }
 
 /* ==========================================
@@ -300,17 +370,16 @@
 }
 
 /* ======================================
-   LOGIN FORM - TABLET (768px+)
+   LOGIN FORM - DESKTOP (768px+)
    ====================================== */
 @media (min-width: 768px) {
   .login-form {
     padding: var(--spacing-xxl);
   }
+}
 
-  .login-form h2 {
-    font-size: var(--font-size-xxl);
-    margin-bottom: var(--spacing-xl);
-  }
+.login-form h2 {
+  font-size: 2.8rem; 
 }
 
 .info-message {
@@ -337,3 +406,4 @@
   font-size: 1.5rem;
   flex-shrink: 0;
 }
+

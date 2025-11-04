@@ -1,82 +1,241 @@
-.fundraiser-form-container {
-  max-width: 400px;
-  margin: 2rem auto;
-  padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+@import "../pages/General.css";
+
+/* ==========================================
+   REGISTRATION FORM - MATCHING LOGIN STYLE
+   ========================================== */
+.registration-form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.form-group {
-  margin-bottom: 1rem;
-}
-
-.form-label {
-  display: block;
-  margin-bottom: 0.5rem;
-}
-
-.form-input,
-.form-textarea {
+.registration-form {
+  background-color: rgba(255, 255, 255, 0.95); /* Same as login form */
+  backdrop-filter: blur(10px); /* Glass morphism effect */
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 20px;
+  box-shadow: 
+    0 12px 40px rgba(0, 0, 0, 0.15),
+    0 4px 20px rgba(0, 0, 0, 0.1);
+  padding: var(--spacing-xxl);
+  max-width: 500px;
   width: 100%;
-  padding: 0.5rem;
-  border-radius: 4px;
-  border: 1px solid #ccc;
+  margin: var(--spacing-lg);
+  animation: slideUp 0.5s ease-out;
 }
 
-.form-button {
-  width: 100%;
-  padding: 0.75rem;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  margin-top: 1rem;
-}
-
-.form-button:hover {
-  background-color: #45a049;
-}
-
-.error-message {
-  color: red;
+.registration-form h2 {
+  font-family: var(--font-heading);
+  font-size: 2.8rem; /* SMALLER: was 3.5rem */
+  font-weight: var(--font-weight-bold);
+  color: #000000;
+  margin-bottom: var(--spacing-xl);
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  line-height: 1.2;
 }
 
+/* Update mobile sizes too */
+@media (max-width: 768px) {
+  .registration-form {
+    padding: var(--spacing-lg);
+    border-radius: 16px;
+    margin: var(--spacing-sm);
+    max-width: 100%;
+  }
+  
+  .registration-form h2 {
+    font-size: 2.2rem; /* SMALLER: was 2.8rem */
+  }
+  
+  .registration-title-icon {
+    width: 90px;
+    height: 90px;
+  }
+}
+
+@media (max-width: 480px) {
+  .registration-form {
+    padding: var(--spacing-md);
+  }
+  
+  .registration-form h2 {
+    font-size: 2rem; /* SMALLER: was 2.5rem */
+  }
+  
+  .registration-title-icon {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+/* Registration title icon */
+.registration-title-icon {
+  width: 120px; 
+  height: 120px;
+  margin-bottom: var(--spacing-md);
+  margin-right: 0;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+}
+
+/* Form fields matching login style */
+.form-group {
+  margin-bottom: var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.form-group label {
+  font-family: var(--font-body);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-dark);
+  margin-bottom: var(--spacing-sm);
+  font-size: var(--font-size-base);
+}
+
+.form-group input {
+  padding: var(--spacing-md);
+  border: 2px solid var(--color-border);
+  border-radius: 8px;
+  font-family: var(--font-body);
+  font-size: var(--font-size-base);
+  transition: all 0.3s ease;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--color-accent-primary);
+  box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1);
+}
+
+.form-group input::placeholder {
+  color: #BDBDBD;
+}
+
+/* Register button matching login style */
+.btn-register {
+  width: 100%;
+  padding: var(--spacing-md);
+  background: linear-gradient(135deg, var(--color-accent-primary) 0%, #E55555 100%);
+  color: var(--color-white);
+  border: none;
+  border-radius: 8px;
+  font-family: var(--font-heading);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-bold);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: var(--spacing-lg);
+}
+
+.btn-register:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(255, 107, 107, 0.3);
+}
+
+.btn-register:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Login link matching login page style */
+.login-link {
+  text-align: center;
+  color: var(--color-text-light);
+  font-size: var(--font-size-sm);
+}
+
+.login-link a {
+  color: var(--color-accent-primary);
+  text-decoration: none;
+  font-weight: var(--font-weight-bold);
+  transition: color 0.3s ease;
+}
+
+.login-link a:hover {
+  color: var(--color-accent-secondary);
+  text-decoration: underline;
+}
+
+/* Error message matching login */
+.error-message {
+  background-color: #FFEBEE;
+  color: var(--color-error);
+  padding: var(--spacing-md);
+  border-radius: 8px;
+  margin-bottom: var(--spacing-lg);
+  font-weight: var(--font-weight-semibold);
+  border-left: 4px solid var(--color-error);
+  animation: shake 0.5s ease-in-out;
+}
+
+.error-content {
+  display: flex;
+  gap: var(--spacing-md);
+  align-items: flex-start;
+}
+
+.error-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+/* Success popup */
 .success-popup {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(10px);
   padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
   z-index: 1000;
   max-width: 400px;
   width: 90%;
+  text-align: center;
 }
 
 .close-button {
   position: absolute;
-  right: 10px;
-  top: 10px;
+  right: 15px;
+  top: 15px;
   border: none;
-  background: none;
-  font-size: 1.3rem;
+  background: rgba(0, 0, 0, 0.1);
+  font-size: 1.5rem;
   cursor: pointer;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .close-button:hover {
-  background-color: #f0f0f0;
-  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.2);
 }
 
-.checkbox-label {
-  display: flex;
-  align-items: center;
+/* Animations */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.checkbox-label input {
-  margin-right: 0.5rem;
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
 }

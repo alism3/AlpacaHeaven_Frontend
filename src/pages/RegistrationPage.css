@@ -1,0 +1,21 @@
+@import "./General.css";
+
+/* ==========================================
+   REGISTRATION PAGE 
+   ========================================== */
+.registration-page-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 70px);
+  padding: var(--spacing-lg);
+  
+  /* Same beautiful alpaca background as login */
+  background-image: 
+    linear-gradient(135deg, rgba(255, 255, 255, 0.6) 0%, rgba(245, 245, 245, 0.5) 100%),
+    url('https://images.unsplash.com/photo-1572297982753-48c028401d18?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1964');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+}

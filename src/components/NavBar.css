@@ -102,10 +102,12 @@
 .nav-link {
   color: var(--color-text-dark);
   text-decoration: none;
-  font-weight: var(--font-weight-semibold);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-base); 
   padding: var(--spacing-sm);
   transition: color 0.3s ease;
   display: block;
+  line-height: 1.4; 
 }
 
 .nav-link:hover {
@@ -321,9 +323,12 @@
     align-items: center;
   }
 
-  .nav-link {
-    padding: 0;
-  }
+.nav-link {
+  padding: 0;
+  font-size: var(--font-size-base); 
+  font-weight: var(--font-weight-bold);
+  line-height: 1.4; 
+}
 
   .nav-user-menu {
     display: none;
