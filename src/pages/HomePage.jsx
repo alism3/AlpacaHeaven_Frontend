@@ -4,7 +4,8 @@ import FundraiserCard from "../components/FundraiserCard";
 import "./HomePage.css";
 
 function HomePage() {
-  const { fundraisers } = useFundraisers();    
+  // Get ALL data from the hook
+  const { fundraisers, isLoading, error } = useFundraisers();    
 
   return (
     <div className="home-page">
@@ -26,32 +27,51 @@ function HomePage() {
             Every pledge helps create a better future for them!
           </p>
           <div className="hero-actions">
-            <Link to="/make-pledge" className="btn btn-primary btn-rounded">
-              Make a Pledge
-            </Link>
-            <Link to="/create-fundraiser" className="btn btn-secondary btn-rounded">
+            <Link to="/create-fundraiser" className="btn btn-primary btn-rounded">
               Start a Campaign
             </Link>
+            <button 
+              onClick={() => {
+                const campaignsSection = document.getElementById('campaigns-section');
+                if (campaignsSection) {
+                  campaignsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+              }}
+              className="btn btn-secondary btn-rounded"
+            >
+              Browse Campaigns
+            </button>
           </div>
         </div>
       </section>
 
-      {/* FUNDRAISERS SECTION */}
-      <section className="section section-light" id="fundraisers">
-        <div className="container">
-          <h2>Active Fundraisers</h2>
-          <div className="fundraiser-list">
+      {/* CAMPAIGNS SECTION - TARGET FOR SCROLL */}
+      <section id="campaigns-section" className="campaigns-container">
+        <div className="campaigns-header">
+          <h2>Our Campaigns</h2>
+          <p>Help alpacas and amazing causes reach their dreams!</p>
+        </div>
+
+        {isLoading ? (
+          <div className="loading">⏳ Loading campaigns...</div>
+        ) : error ? (
+          <div className="error">❌ {error}</div>
+        ) : (
+          <div className="fundraisers-grid">
             {fundraisers && fundraisers.length > 0 ? (
-              fundraisers.map((fundraiserData, key) => {
-                return <FundraiserCard key={key} fundraiserData={fundraiserData} />;
-              })
+              fundraisers.map((fundraiser) => (
+                <FundraiserCard key={fundraiser.id} fundraiserData={fundraiser} />
+              ))
             ) : (
-              <p className="no-fundraisers">
-                No fundraisers yet. Be the first to create one! 🎉
-              </p>
+              <div className="no-fundraisers">
+                📭 No campaigns yet. Be the first to create one!
+                <Link to="/create-fundraiser" className="create-first-btn">
+                  Create First Campaign
+                </Link>
+              </div>
             )}
           </div>
-        </div>
+        )}
       </section>
     </div>
   );

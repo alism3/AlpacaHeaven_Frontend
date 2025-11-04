@@ -9,6 +9,7 @@ import LoginPage from "./pages/LoginPage.jsx";
 import RegistrationPage from "./pages/RegistrationPage.jsx";
 import UserProfilePage from "./pages/UserProfilePage.jsx";
 import NotFoundPage from "./pages/NotFoundPage.jsx";
+import PledgeForm from './components/PledgeForm';
 
 import NavBar from "./components/NavBar.jsx";
 
@@ -20,11 +21,12 @@ const router = createBrowserRouter([
       { path: "/", element: <HomePage /> },
       { path: "/login", element: <LoginPage /> },
       { path: "/fundraiser/:id", element: <FundraiserPage /> },
+      { path: "/fundraiser/:id/pledge", element: <PledgeForm /> }, // ADD THIS LINE
       { path: "/register", element: <RegistrationPage /> },
       { path: "/create-fundraiser", element: <FundraiserForm /> },
       { path: "/profile", element: <UserProfilePage /> },
-      { path: "/my-pledges", element: <UserProfilePage /> }, // Same page, different tab
-      { path: "*", element: <NotFoundPage /> }, // 404 catch-all
+      { path: "/my-pledges", element: <UserProfilePage /> },
+      { path: "*", element: <NotFoundPage /> },
     ],
   },
 ]);

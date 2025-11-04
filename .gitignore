@@ -305,3 +305,12 @@ Think of your website like a house:
 - Verify all fields work before adding API
 
 # Remember: A room without a door is just a wall! 🚪
+
+##CSS SPACING
+
+--spacing-xs: 4px    (tiny)
+--spacing-sm: 8px    (small)
+--spacing-md: 16px   (medium) ← Hero section now uses this
+--spacing-lg: 24px   (large)  ← Supporters section now uses this
+--spacing-xl: 32px   (extra large)
+--spacing-xxl: 48px  (huge - removed from supporters)

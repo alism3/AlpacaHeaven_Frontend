@@ -2,9 +2,14 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import postLogin from "../api/post-login.js";
 import "./LoginForm.css";
+import { useLocation } from "react-router-dom";
 
 function LoginForm() {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const returnTo = location.state?.returnTo || '/';
+  const loginMessage = location.state?.message;
 
   const [credentials, setCredentials] = useState({
       username: "",
@@ -76,8 +81,8 @@ function LoginForm() {
 
           // Redirect after showing success message
           setTimeout(() => {
-              console.log("Redirecting to home...");
-              navigate("/", { replace: true });
+              console.log("Redirecting to:", returnTo);
+              navigate(returnTo, { replace: true }); // Uses returnTo instead of "/"
               
               // Force refresh to update NavBar
               setTimeout(() => {
@@ -111,6 +116,15 @@ function LoginForm() {
     <div className="login-form-container">
       <form className="login-form" onSubmit={handleSubmit}>
         <h2>Welcome Back! 🦙</h2>
+
+  {loginMessage && (
+      <div className="info-message">
+          <div className="info-content">
+              <span className="info-icon">ℹ️</span>
+              <p>{loginMessage}</p>
+          </div>
+      </div>
+  )}
 
         {success && (
           <div className="success-message">

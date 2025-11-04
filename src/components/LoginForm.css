@@ -312,3 +312,28 @@
     margin-bottom: var(--spacing-xl);
   }
 }
+
+.info-message {
+  background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+  color: #1565C0;
+  padding: var(--spacing-md);
+  border-radius: 8px;
+  margin-bottom: var(--spacing-lg);
+  font-weight: var(--font-weight-semibold);
+  border-left: 4px solid #2196F3;
+  display: flex;
+  gap: var(--spacing-md);
+  align-items: center;
+  animation: slideDown 0.5s ease-out;
+}
+
+.info-content {
+  display: flex;
+  gap: var(--spacing-md);
+  align-items: center;
+}
+
+.info-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
