@@ -1,8 +1,7 @@
-import { useParams, Link, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import useFundraiser from "../hooks/use-fundraiser";
 import "./FundraiserPage.css";
 import alpacaIcon from "../assets/alpaca.png";
-
 
 function FundraiserPage() {
     const { id } = useParams();
@@ -123,19 +122,22 @@ function FundraiserPage() {
                                     <span className="label">Raised</span>
                                 </div>
                                 <div className="stat-item">
+                                    <span className="amount">${fundraiser.goal.toLocaleString()}</span>
+                                    <span className="label">Goal</span>
+                                </div>
+                                <div className="stat-item">
                                     <span className="amount">{supporterCount}</span>
                                     <span className="label">Supporters</span>
                                 </div>
                             </div>
-                            
+
                             <div className="progress-bar">
                                 <div 
                                     className="progress-fill" 
-                                    style={{ width: `${Math.min((totalRaised / 10000) * 100, 100)}%` }}
+                                    style={{ width: `${Math.min((totalRaised / fundraiser.goal) * 100, 100)}%` }}
                                 ></div>
                             </div>
                         </div>
-
                         {/* Description */}
                         <div className="description-section">
                             <h3>About This Campaign</h3>
@@ -182,10 +184,12 @@ function FundraiserPage() {
                             {fundraiser.pledges.map((pledge, index) => (
                                 <div key={index} className="pledge-card">
                                     <div className="pledge-info">
-                                        <span className="pledge-supporter">{pledge.supporter}</span>
+                                        <span className="pledge-supporter">
+                                            {pledge.anonymous ? 'Anonymous Supporter' : `Supporter #${pledge.supporter}`}
+                                        </span>
                                         <span className="pledge-amount">${pledge.amount}</span>
                                         <p className="pledge-comment">
-                                            "Supporting amazing alpaca projects! 🌟"
+                                            "{pledge.comment || 'Thanks for this amazing campaign! 🌟'}"
                                         </p>
                                     </div>
                                 </div>

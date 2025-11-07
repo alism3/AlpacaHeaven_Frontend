@@ -21,9 +21,11 @@ const router = createBrowserRouter([
       { path: "/", element: <HomePage /> },
       { path: "/login", element: <LoginPage /> },
       { path: "/fundraiser/:id", element: <FundraiserPage /> },
-      { path: "/fundraiser/:id/pledge", element: <PledgeForm /> }, // ADD THIS LINE
+      { path: "/fundraiser/:fundraiserId/pledge", element: <PledgeForm /> }, // ← Changed :id to :fundraiserId
       { path: "/register", element: <RegistrationPage /> },
       { path: "/create-fundraiser", element: <FundraiserForm /> },
+      { path: "/edit-fundraiser/:id", element: <FundraiserForm /> },
+      { path: "/start-fundraise", element: <FundraiserForm /> },
       { path: "/profile", element: <UserProfilePage /> },
       { path: "/my-pledges", element: <UserProfilePage /> },
       { path: "*", element: <NotFoundPage /> },

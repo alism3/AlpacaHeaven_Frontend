@@ -25,7 +25,7 @@ function EditFundraiserPage() {
 
   const fetchFundraiser = async () => {
     try {
-      const response = await fetch(`http://127.0.0.1:8000/api/fundraisers/${id}/`);
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/fundraisers/${id}/`);
       
       if (!response.ok) {
         throw new Error("Fundraiser not found");
@@ -42,7 +42,7 @@ function EditFundraiserPage() {
       setFormData({
         title: data.title,
         description: data.description,
-        target_amount: data.target_amount,
+        target_amount: data.goal || data.target_amount,
         image: data.image || "",
         is_open: data.is_open,
       });
@@ -72,13 +72,16 @@ function EditFundraiserPage() {
     }
 
     try {
-      const response = await fetch(`http://127.0.0.1:8000/api/fundraisers/${id}/`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/fundraisers/${id}/`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
           "Authorization": `Token ${token}`,
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          ...formData,
+          goal: formData.target_amount // Map target_amount to goal for API
+        }),
       });
 
       if (!response.ok) {
@@ -185,7 +188,7 @@ function EditFundraiserPage() {
 
           <div className="form-group">
             <label htmlFor="image" className="form-label">
-              Image URL (optional)
+              Campaign Image URL
             </label>
             <input
               type="url"
@@ -194,8 +197,50 @@ function EditFundraiserPage() {
               value={formData.image}
               onChange={handleInputChange}
               className="form-input"
-              placeholder="https://example.com/image.jpg"
+              placeholder="https://example.com/your-awesome-image.jpg"
             />
+            {formData.image && (
+              <div className="image-preview-enhanced">
+                <div className="preview-header">
+                  <span className="preview-label">✨ Image Preview</span>
+                  <span className="preview-status" id="image-status">Loading...</span>
+                </div>
+                <div className="preview-container">
+                  <img 
+                    key={formData.image}
+                    src={formData.image}
+                    alt="Campaign Preview" 
+                    className="preview-image"
+                    onLoad={(e) => {
+                      console.log('✅ Image loaded successfully:', formData.image);
+                      const statusElement = document.getElementById('image-status');
+                      if (statusElement) {
+                        statusElement.textContent = '✅ Image updated successfully!';
+                        statusElement.className = 'preview-status success';
+                      }
+                    }}
+                    onError={(e) => {
+                      console.log('❌ Image failed to load:', formData.image);
+                      const statusElement = document.getElementById('image-status');
+                      if (statusElement) {
+                        statusElement.textContent = '❌ Failed to load image';
+                        statusElement.className = 'preview-status error';
+                      }
+                      e.target.style.display = 'none';
+                      e.target.nextSibling.style.display = 'flex';
+                    }}
+                  />
+                  <div className="preview-error" style={{ display: 'none' }}>
+                    <div className="error-icon">📷</div>
+                    <p>Image could not be loaded</p>
+                    <small>Please check the URL and try again</small>
+                  </div>
+                </div>
+                <div className="preview-info">
+                  <small>This is how your campaign image will appear to supporters</small>
+                </div>
+              </div>
+            )}
           </div>
 
           <div className="form-group">

@@ -68,9 +68,9 @@ function LoginForm() {
           // Store user data (backend returns user_id and email)
           if (response.user_id) {
               localStorage.setItem("user", JSON.stringify({
-                  id: response.user_id,
+                  id: parseInt(response.user_id), // ← ADD parseInt() HERE
                   email: response.email,
-                  username: credentials.username  // ← We store the username from form
+                  username: credentials.username
               }));
               console.log("✅ User stored");
           }

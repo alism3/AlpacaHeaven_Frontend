@@ -89,7 +89,7 @@
 
 /* Add this after line 87: */
 .login-title-icon {
-  width: 120px;  
+  width: 250px;  
   height: 120px;
   margin-bottom: var(--spacing-md); 
   margin-right: 0; 

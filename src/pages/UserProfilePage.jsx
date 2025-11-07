@@ -22,8 +22,8 @@ function UserProfilePage() {
     try {
       setLoading(true);
       
-      // Fetch user's fundraisers
-      const fundraisersResponse = await fetch("http://127.0.0.1:8000/api/fundraisers/", {
+      // Use env variable instead of hardcoded localhost
+      const fundraisersResponse = await fetch(`${import.meta.env.VITE_API_URL}/fundraisers/`, {
         headers: {
           "Authorization": `Token ${token}`,
         },
@@ -31,12 +31,12 @@ function UserProfilePage() {
       
       if (fundraisersResponse.ok) {
         const allFundraisers = await fundraisersResponse.json();
-        const myFundraisers = allFundraisers.filter(f => f.owner === currentUser.id);
+        const myFundraisers = allFundraisers.filter(f => f.owner === parseInt(currentUser.id));
         setUserFundraisers(myFundraisers);
       }
 
-      // Fetch user's pledges
-      const pledgesResponse = await fetch("http://127.0.0.1:8000/api/pledges/", {
+      // Also fix pledges endpoint
+      const pledgesResponse = await fetch(`${import.meta.env.VITE_API_URL}/pledges/`, {
         headers: {
           "Authorization": `Token ${token}`,
         },
@@ -44,7 +44,7 @@ function UserProfilePage() {
       
       if (pledgesResponse.ok) {
         const allPledges = await pledgesResponse.json();
-        const myPledges = allPledges.filter(p => p.supporter === currentUser.id);
+        const myPledges = allPledges.filter(p => p.supporter === parseInt(currentUser.id));
         setUserPledges(myPledges);
       }
 
@@ -59,7 +59,7 @@ function UserProfilePage() {
     if (!window.confirm("Are you sure you want to delete this fundraiser?")) return;
 
     try {
-      const response = await fetch(`http://127.0.0.1:8000/api/fundraisers/${fundraiserId}/`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/fundraisers/${fundraiserId}/`, {
         method: "DELETE",
         headers: {
           "Authorization": `Token ${token}`,
@@ -91,7 +91,13 @@ function UserProfilePage() {
         {/* Header */}
         <div className="profile-header">
           <div className="profile-info">
-            <div className="profile-avatar">🦙</div>
+            <div className="profile-avatar">
+              <img 
+                src="https://i.pinimg.com/1200x/c8/c3/3f/c8c33f682259d086bb476293d10ef0c3.jpg" 
+                alt="Profile Avatar" 
+                className="avatar-image"
+              />
+            </div>
             <div>
               <h1>Welcome back, {currentUser.username}!</h1>
               <p className="profile-email">{currentUser.email}</p>
@@ -122,51 +128,71 @@ function UserProfilePage() {
         {/* Content */}
         {activeTab === "fundraisers" && (
           <div className="tab-content">
-            {userFundraisers.length === 0 ? (
-              <div className="empty-state">
-                <p>📭 You haven't created any campaigns yet</p>
-                <Link to="/create-fundraiser" className="cta-btn">
-                  Create Your First Campaign
-                </Link>
-              </div>
-            ) : (
-              <div className="items-grid">
+            {userFundraisers.length > 0 ? (
+              <div className="fundraisers-grid">
                 {userFundraisers.map((fundraiser) => (
-                  <div key={fundraiser.id} className="fundraiser-item">
-                    <div className="item-image">
-                      {fundraiser.image ? (
-                        <img src={fundraiser.image} alt={fundraiser.title} />
-                      ) : (
-                        <div className="placeholder">🦙</div>
-                      )}
+                  <div key={fundraiser.id} className="fundraiser-card">
+                    <div className="fundraiser-image-container">
+                      <img 
+                        src={fundraiser.image || "/api/placeholder/400/250"} 
+                        alt={fundraiser.title}
+                        className="fundraiser-card-image"
+                      />
+                      <div className="card-status-overlay">
+                        <span className={`status-badge ${fundraiser.is_open ? 'active' : 'closed'}`}>
+                          {fundraiser.is_open ? '🌟 Active' : '❌ Closed'}
+                        </span>
+                      </div>
                     </div>
                     
-                    <div className="item-content">
+                    <div className="card-content">
                       <h3>{fundraiser.title}</h3>
-                      <p className="item-description">
-                        {fundraiser.description.substring(0, 100)}...
+                      <p className="card-description">
+                        {fundraiser.description.length > 100 
+                          ? `${fundraiser.description.substring(0, 100)}...` 
+                          : fundraiser.description}
                       </p>
                       
-                      <div className="item-stats">
-                        <span>${fundraiser.current_amount || 0} raised</span>
-                        <span>Goal: ${fundraiser.target_amount}</span>
+                      <div className="card-stats">
+                        <div className="stats-row">
+                          <div className="stat-item">
+                            <span className="stat-label">Goal</span>
+                            <span className="stat-value">${fundraiser.goal.toLocaleString()}</span>
+                          </div>
+                          <div className="stat-item">
+                            <span className="stat-label">Raised</span>
+                            <span className="stat-value">
+                              ${fundraiser.pledges?.reduce((sum, pledge) => sum + pledge.amount, 0).toLocaleString() || '0'}
+                            </span>
+                          </div>
+                          <div className="stat-item">
+                            <span className="stat-label">Supporters</span>
+                            <span className="stat-value">{fundraiser.pledges?.length || 0}</span>
+                          </div>
+                        </div>
+                        
+                        <div className="progress-bar">
+                          <div 
+                            className="progress-fill" 
+                            style={{ 
+                              width: `${Math.min(
+                                (fundraiser.pledges?.reduce((sum, pledge) => sum + pledge.amount, 0) / fundraiser.goal) * 100, 
+                                100
+                              )}%` 
+                            }}
+                          ></div>
+                        </div>
                       </div>
                       
-                      <div className="item-actions">
-                        <Link 
-                          to={`/fundraiser/${fundraiser.id}`}
-                          className="btn btn-primary"
-                        >
-                          View
+                      <div className="card-actions">
+                        <Link to={`/fundraiser/${fundraiser.id}`} className="btn btn-view">
+                          View Campaign
                         </Link>
-                        <Link 
-                          to={`/edit-fundraiser/${fundraiser.id}`}
-                          className="btn btn-secondary"
-                        >
+                        <Link to={`/edit-fundraiser/${fundraiser.id}`} className="btn btn-secondary">
                           Edit
                         </Link>
                         <button 
-                          onClick={() => handleDeleteFundraiser(fundraiser.id)}
+                          onClick={() => handleDeleteFundraiser(fundraiser.id)} 
                           className="btn btn-danger"
                         >
                           Delete
@@ -175,6 +201,13 @@ function UserProfilePage() {
                     </div>
                   </div>
                 ))}
+              </div>
+            ) : (
+              <div className="no-campaigns">
+                <p>🌱 You haven't created any campaigns yet!</p>
+                <Link to="/create-fundraiser" className="btn btn-primary">
+                  Create Your First Campaign
+                </Link>
               </div>
             )}
           </div>

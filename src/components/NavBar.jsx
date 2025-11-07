@@ -104,13 +104,6 @@ function NavBar() {
           {isLoggedIn ? (
               <>
                 {/* Logged In User Menu */}
-                <Link 
-                  to="/create-fundraiser" 
-                  className="nav-link"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Create Campaign
-                </Link>
 
                 {/* FIX: Change this from Link to button with click handler */}
                 <button 
@@ -120,6 +113,14 @@ function NavBar() {
                 >
                   Campaigns
                 </button>
+
+                 <Link 
+                  to="/start-fundraise" 
+                  className="nav-link"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Start a Fundraise
+                </Link>
 
                 {/* Profile Dropdown - Desktop */}
                 <div className="profile-dropdown desktop-only">
@@ -202,6 +203,14 @@ function NavBar() {
                 >
                   Campaigns
                 </button>
+
+                <Link 
+                  to="/start-fundraise" 
+                  className="nav-link"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Start a Fundraise
+                </Link>
 
                 <Link 
                   to="/login" 

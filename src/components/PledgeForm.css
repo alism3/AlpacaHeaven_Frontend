@@ -1,101 +1,596 @@
+@import "../pages/General.css";
+
+/* ==========================================
+   PLEDGE FORM CONTAINER - SAME AS FUNDRAISER FORM
+   ========================================== */
 .pledge-form-container {
-  max-width: 400px;
-  margin: 2rem auto;
-  padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 70px);
+  padding: var(--spacing-lg);
+  position: relative;
+  overflow: hidden;
+  
+  /* SAME BEAUTIFUL ANIMATED BACKGROUND AS FUNDRAISER */
+  background: 
+    linear-gradient(45deg, 
+      var(--color-background) 0%,    
+      var(--color-cream) 20%,        
+      #F4F0EA 40%,                   
+      #C29F84 60%,                   
+      var(--color-pasture-green) 80%, 
+      #B0CBEA 100%                   
+    ),
+    
+    radial-gradient(ellipse at 15% 25%, rgba(194, 159, 132, 0.06) 0%, transparent 60%),
+    radial-gradient(ellipse at 85% 75%, rgba(168, 213, 186, 0.04) 0%, transparent 70%),
+    radial-gradient(ellipse at 35% 65%, rgba(176, 203, 234, 0.03) 0%, transparent 50%),
+    radial-gradient(ellipse at 75% 15%, rgba(255, 248, 240, 0.08) 0%, transparent 55%);
+  
+  background-size: 300% 300%, 220% 160%, 200% 220%, 180% 200%, 240% 150%;
+  animation: 
+    alpacaNaturalFlow 28s ease-in-out infinite,
+    gentleEarthShift 35s ease-in-out infinite reverse,
+    skyBreeze 40s linear infinite;
 }
 
+/* SAME ANIMATIONS AS FUNDRAISER */
+@keyframes alpacaNaturalFlow {
+  0% {
+    background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+  }
+  33% {
+    background-position: 30% 40%, 25% 15%, 20% 35%, 40% 20%, 35% 30%;
+  }
+  66% {
+    background-position: 70% 70%, 60% 45%, 50% 70%, 75% 50%, 80% 60%;
+  }
+  100% {
+    background-position: 100% 30%, 90% 80%, 80% 40%, 60% 90%, 40% 100%;
+  }
+}
+
+@keyframes gentleEarthShift {
+  0%, 100% {
+    filter: brightness(1.01) saturate(1.02) sepia(0.02);
+  }
+  50% {
+    filter: brightness(1.03) saturate(1.05) sepia(0.04);
+  }
+}
+
+@keyframes skyBreeze {
+  0% {
+    background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+  }
+  100% {
+    background-position: 60% 60%, 40% 80%, 80% 40%, 70% 90%, 90% 70%;
+  }
+}
+
+/* SAME OVERLAY AS FUNDRAISER */
+.pledge-form-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(circle at 20% 70%, rgba(194, 159, 132, 0.04) 0%, transparent 40%),
+    radial-gradient(circle at 80% 20%, rgba(168, 213, 186, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 45% 25%, rgba(176, 203, 234, 0.025) 0%, transparent 60%),
+    radial-gradient(ellipse at 15% 85%, rgba(255, 248, 240, 0.05) 0%, transparent 35%),
+    radial-gradient(ellipse at 85% 15%, rgba(250, 250, 248, 0.02) 0%, transparent 45%);
+  
+  background-size: 170% 130%, 150% 120%, 190% 140%, 120% 100%, 140% 110%;
+  animation: naturalTextureFlow 42s ease-in-out infinite;
+  z-index: 1;
+  pointer-events: none;
+}
+
+@keyframes naturalTextureFlow {
+  0%, 100% {
+    background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+    opacity: 0.7;
+  }
+  50% {
+    background-position: 50% 40%, 60% 50%, 40% 60%, 80% 40%, 50% 80%;
+    opacity: 0.9;
+  }
+}
+
+/* ==========================================
+   PLEDGE FORM - GLASS MORPHISM STYLE
+   ========================================== */
+.pledge-form {
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 20px;
+  box-shadow: 
+    0 12px 40px rgba(0, 0, 0, 0.15),
+    0 4px 20px rgba(0, 0, 0, 0.1);
+  padding: var(--spacing-lg);
+  max-width: 500px;
+  width: 100%;
+  margin: var(--spacing-md);
+  animation: slideUp 0.5s ease-out;
+  position: relative;
+  z-index: 5;
+}
+
+/* ==========================================
+   PLEDGE TITLE WITH EMOJI
+   ========================================== */
+.pledge-title {
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+  font-weight: var(--font-weight-bold);
+  color: #000000;
+  margin-bottom: var(--spacing-xl);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  line-height: 1.2;
+}
+
+.pledge-title-icon {
+  width: 250px;
+  height: 250px;
+  margin-bottom: var(--spacing-lg);
+  object-fit: cover;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+  border-radius: 50%;
+  border: 3px solid rgba(40, 167, 69, 0.8); /* Green border for pledges */
+}
+
+.pledge-title-emoji:hover {
+  transform: scale(1.05);
+}
+
+/* ==========================================
+   CUTE AMOUNT COUNTER
+   ========================================== */
+.amount-counter-container {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  background: rgba(255, 255, 255, 0.8);
+  border: 2px solid var(--color-border);
+  border-radius: 12px;
+  padding: var(--spacing-sm);
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.amount-counter-container:focus-within {
+  border-color: #28a745;
+  box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.1);
+  background: rgba(255, 255, 255, 0.95);
+}
+
+/* ==========================================
+   PLUS/MINUS BUTTONS - SUPER CUTE
+   ========================================== */
+.amount-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: var(--font-heading);
+  font-weight: var(--font-weight-bold);
+  position: relative;
+  overflow: hidden;
+}
+
+.amount-btn-minus {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ff5252 100%);
+  color: white;
+  box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
+}
+
+.amount-btn-minus:hover:not(:disabled) {
+  background: linear-gradient(135deg, #ff5252 0%, #f44336 100%);
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 6px 16px rgba(255, 107, 107, 0.4);
+}
+
+.amount-btn-plus {
+  background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+  color: white;
+  box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+  animation: gentlePulse 2s ease-in-out infinite;
+}
+
+.amount-btn-plus:hover {
+  background: linear-gradient(135deg, #20c997 0%, #17a2b8 100%);
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 6px 16px rgba(40, 167, 69, 0.4);
+  animation: none;
+}
+
+/* Gentle pulse animation for plus button */
+@keyframes gentlePulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+  }
+  50% {
+    transform: scale(1.02);
+    box-shadow: 0 5px 14px rgba(40, 167, 69, 0.35);
+  }
+}
+
+/* Button text and icons */
+.btn-icon {
+  font-size: 1.5rem;
+  line-height: 1;
+  margin-bottom: 2px;
+}
+
+.btn-text {
+  font-size: 0.7rem;
+  line-height: 1;
+  opacity: 0.9;
+}
+
+/* Disabled state */
+.amount-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+  animation: none !important;
+}
+
+/* ==========================================
+   AMOUNT INPUT - CENTERED & STYLED
+   ========================================== */
+.amount-input-wrapper {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.currency-symbol {
+  position: absolute;
+  left: 15px;
+  font-size: 1.2rem;
+  font-weight: var(--font-weight-bold);
+  color: #28a745;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.amount-input {
+  width: 100%;
+  padding: var(--spacing-md) var(--spacing-md) var(--spacing-md) 35px !important;
+  border: none !important;
+  background: transparent !important;
+  font-size: 1.2rem;
+  font-weight: var(--font-weight-bold);
+  text-align: center;
+  color: #28a745;
+  border-radius: 8px;
+}
+
+.amount-input:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  background: rgba(40, 167, 69, 0.05) !important;
+}
+
+.amount-input::placeholder {
+  color: #a0a0a0;
+  font-weight: var(--font-weight-normal);
+}
+
+/* ==========================================
+   HELPER TEXT - CUTE & INFORMATIVE
+   ========================================== */
+.amount-helper-text {
+  margin-top: var(--spacing-sm);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-light);
+  text-align: center;
+  font-style: italic;
+  opacity: 0.8;
+}
+
+/* ==========================================
+   FORM FIELDS - MATCHING FUNDRAISER STYLE
+   ========================================== */
 .form-group {
-  margin-bottom: 1rem;
+  margin-bottom: var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  position: relative;
 }
 
 .form-label {
-  display: block;
-  margin-bottom: 0.5rem;
-  font-weight: 600;
+  font-family: var(--font-body);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-dark);
+  margin-bottom: var(--spacing-sm);
+  font-size: var(--font-size-base);
 }
 
 .form-input,
 .form-textarea {
+  padding: var(--spacing-md);
+  border: 2px solid var(--color-border);
+  border-radius: 8px;
+  font-family: var(--font-body);
+  font-size: var(--font-size-base);
+  transition: all 0.3s ease;
   width: 100%;
-  padding: 0.5rem;
-  border-radius: 4px;
-  border: 1px solid #ccc;
   box-sizing: border-box;
-  font-family: inherit;
 }
 
 .form-input:focus,
 .form-textarea:focus {
   outline: none;
-  border-color: #007bff;
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+  border-color: #28a745;
+  box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.1);
 }
 
+.form-input::placeholder,
+.form-textarea::placeholder {
+  color: #BDBDBD;
+}
+
+.form-textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* ==========================================
+   FORM BUTTON - GREEN THEME FOR PLEDGES
+   ========================================== */
 .form-button {
   width: 100%;
-  padding: 0.75rem;
-  background-color: #007bff;
-  color: white;
+  padding: var(--spacing-md);
+  background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+  color: var(--color-white);
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
+  font-family: var(--font-heading);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-bold);
   cursor: pointer;
-  margin-top: 1rem;
-  font-size: 1rem;
-  font-weight: 600;
+  transition: all 0.3s ease;
+  margin-top: var(--spacing-lg);
 }
 
-.form-button:hover {
-  background-color: #0056b3;
+.form-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(40, 167, 69, 0.3);
 }
 
+.form-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* ==========================================
+   ERROR MESSAGE - MATCHING FUNDRAISER STYLE
+   ========================================== */
 .error-message {
-  padding: 1rem;
-  background-color: #f8d7da;
-  color: #721c24;
-  border-radius: 4px;
-  margin-bottom: 1rem;
+  background-color: #FFEBEE;
+  color: var(--color-error);
+  padding: var(--spacing-md);
+  border-radius: 8px;
+  margin-bottom: var(--spacing-lg);
+  font-weight: var(--font-weight-semibold);
+  border-left: 4px solid var(--color-error);
+  animation: shake 0.5s ease-in-out;
   text-align: center;
 }
 
+/* ==========================================
+   SUCCESS POPUP - MATCHING FUNDRAISER STYLE
+   ========================================== */
 .success-popup {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(10px);
   padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
   z-index: 1000;
-  max-width: 400px;
+  max-width: 500px;
   width: 90%;
+  text-align: center;
+  animation: slideUp 0.5s ease-out;
+}
+
+.success-popup h2 {
+  color: #28a745;
+  margin-bottom: var(--spacing-md);
+  font-size: var(--font-size-lg);
+  margin-top: 0;
+}
+
+.success-popup p {
+  color: var(--color-text-dark);
+  margin: 0.5rem 0;
+  line-height: 1.6;
 }
 
 .close-button {
   position: absolute;
-  right: 10px;
-  top: 10px;
+  right: 15px;
+  top: 15px;
   border: none;
-  background: none;
-  font-size: 1.3rem;
+  background: rgba(0, 0, 0, 0.1);
+  font-size: 1.5rem;
   cursor: pointer;
-  padding: 5px 10px;
-  border-radius: 4px;
-  transition: background-color 0.2s;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
 }
 
 .close-button:hover {
-  background-color: #f0f0f0;
+  background: rgba(0, 0, 0, 0.2);
 }
 
-.success-popup h2 {
-  margin-top: 0;
-  color: #28a745;
+/* ==========================================
+   ANIMATIONS
+   ========================================== */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.success-popup p {
-  margin: 0.5rem 0;
-  color: #333;
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+/* ==========================================
+   MOBILE RESPONSIVE
+   ========================================== */
+@media (max-width: 768px) {
+  .pledge-form-container {
+    padding: var(--spacing-md);
+    background: 
+      linear-gradient(135deg, 
+        var(--color-background) 0%,    
+        var(--color-cream) 30%,       
+        #C29F84 60%,                   
+        var(--color-pasture-green) 100% 
+      );
+    background-size: 200% 200%;
+    animation: gentleNaturalBreeze 32s ease infinite;
+  }
+  
+  .pledge-form {
+    padding: var(--spacing-lg);
+    border-radius: 16px;
+    margin: var(--spacing-sm);
+    max-width: 100%;
+  }
+  
+  .pledge-title {
+    font-size: 2.2rem;
+  }
+  
+  .pledge-title-emoji {
+    width: 140px;
+    height: 140px;
+    font-size: 90px;
+  }
+  
+  .amount-counter-container {
+    gap: var(--spacing-xs);
+    padding: var(--spacing-xs);
+  }
+  
+  .amount-btn {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .btn-icon {
+    font-size: 1.2rem;
+  }
+  
+  .btn-text {
+    font-size: 0.6rem;
+  }
+  
+  .amount-input {
+    font-size: 1.1rem;
+    padding: var(--spacing-sm) var(--spacing-sm) var(--spacing-sm) 30px !important;
+  }
+  
+  .currency-symbol {
+    font-size: 1.1rem;
+    left: 12px;
+  }
+}
+
+@keyframes gentleNaturalBreeze {
+  0%, 100% {
+    background-position: 0% 0%;
+    filter: brightness(1.01) sepia(0.01);
+  }
+  50% {
+    background-position: 100% 100%;
+    filter: brightness(1.02) sepia(0.03);
+  }
+}
+
+@media (max-width: 480px) {
+  .pledge-form-container {
+    padding: var(--spacing-sm);
+  }
+  
+  .pledge-form {
+    padding: var(--spacing-md);
+  }
+  
+  .pledge-title {
+    font-size: 2rem;
+  }
+  
+  .pledge-title-emoji {
+    width: 120px;
+    height: 120px;
+    font-size: 80px;
+  }
+  
+  .amount-counter-container {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+  
+  .amount-input-wrapper {
+    order: -1;
+    width: 100%;
+  }
+  
+  .amount-btn {
+    width: 80px;
+    height: 45px;
+    border-radius: 25px;
+    flex-direction: row;
+    gap: 5px;
+  }
+  
+  .btn-icon {
+    font-size: 1.1rem;
+  }
+  
+  .btn-text {
+    font-size: 0.75rem;
+  }
+  
+  .form-textarea {
+    min-height: 100px;
+  }
 }
